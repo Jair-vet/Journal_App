@@ -19,7 +19,7 @@ const routes = [
   },
   {
     path: '/daybook',
-    ...daybookRouter
+    ...daybookRouter  // Operador Spred para mandar a llamar la importacion
   }
 ]
 
