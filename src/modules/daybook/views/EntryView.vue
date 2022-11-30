@@ -109,8 +109,10 @@ export default {
             if( this.entry.id ){
                 // Actualizar
                 await this.updateEntry( this.entry )
+            } else{
+                // Crear una nueva entrada
+                
             }
-            // Mando llamar la Accion
 
         },
     },
