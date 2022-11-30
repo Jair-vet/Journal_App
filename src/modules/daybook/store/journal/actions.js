@@ -36,8 +36,21 @@ export const updateEntry = async ({ commit }, entry) => {
 
 }
 
-export const createEntry = async (/*{ commit }*/) => {
+export const createEntry = async ({ commit }, entry) => {
   
+    // Extraer los datos que necesitamos
+    const { date, picture, text } = entry
+    const dataToSave = { date, picture, text }
+
+    // Mando llamar la peticion
+    const { data } = await journalApi.post( `/entries.json`, dataToSave )
+    
+    dataToSave.id = data.name
+
+    // Commmit de una mutacion
+    commit('addEntry', dataToSave)
+
+    return data.name
 }
 
 

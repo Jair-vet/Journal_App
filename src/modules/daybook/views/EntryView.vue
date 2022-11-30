@@ -89,7 +89,7 @@ export default {
     },
     
     methods: {
-        ...mapActions('journal', ['updateEntry']),
+        ...mapActions('journal', ['updateEntry', 'createEntry']),
 
         loadEntry() {
             let entry;
@@ -114,6 +114,10 @@ export default {
                 await this.updateEntry( this.entry )
             } else{
                 // Crear una nueva entrada
+                const id = await this.createEntry( this.entry )
+
+                // redirecTo => entry, param: id
+                return this.$router.push({ name: 'entry', params: { id } })
 
             }
 
