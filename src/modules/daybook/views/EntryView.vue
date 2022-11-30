@@ -1,41 +1,47 @@
 <template>
-  <div class="entry-title d-flex justify-content-between p-2">
-    <div>
-        <span class="text-info fs-3 fw-bold">{{ dayMonthYear.day }}</span>
-        <span class="mx-1 fs-3">{{ dayMonthYear.month }}</span>
-        <span class="mx-2 fs-3 fw-light">{{ entryYear }}</span>
-    </div>
+    <template v-if="entry">
 
-    <div>
-        <button class="btn btn-danger mx-2">
-            Borrar
-            <i class="fa fa-trash-alt"></i>
-        </button>
+        <div v-if="entry" class="entry-title d-flex justify-content-between p-2">
+          
+          <div>
+              <span class="text-info fs-3 fw-bold">{{ dayMonthYear.day }}</span>
+              <span class="mx-1 fs-3">{{ dayMonthYear.month }}</span>
+              <span class="mx-2 fs-3 fw-light">{{ entryYear }}</span>
+          </div>
+      
+          <div>
+              <button class="btn btn-danger mx-2">
+                  Borrar
+                  <i class="fa fa-trash-alt"></i>
+              </button>
+      
+              <button class="btn btn-primary">
+                  Foto
+                  <i class="fa fa-upload"></i>
+              </button>
+          </div>
+      
+        </div>
+      
+        <hr>
+        <div class="d-flex flex-column px-3 h-75">
+          <textarea 
+              v-model="entry.text"
+              placeholder="¿Qué sucedió hoy?"
+          ></textarea>   
+        </div>
 
-        <button class="btn btn-primary">
-            Foto
-            <i class="fa fa-upload"></i>
-        </button>
-    </div>
 
-  </div>
-
-  <hr>
-  <div class="d-flex flex-column px-3 h-75">
-    <textarea 
-        v-model="entry.text"
-        placeholder="¿Qué sucedió hoy?"
-    ></textarea>   
-  </div>
+        <img  src="https://estaticos-cdn.sport.es/clip/cc1f1efe-5198-459e-8e27-9d07d852a94b_alta-libre-aspect-ratio_default_0.jpg"
+              alt="entry-picture"
+              class="img-thumbnail"
+        >
+    </template>
 
   <Fab 
     icon="fa-save"
   />
 
-  <img  src="https://estaticos-cdn.sport.es/clip/cc1f1efe-5198-459e-8e27-9d07d852a94b_alta-libre-aspect-ratio_default_0.jpg"
-        alt="entry-picture"
-        class="img-thumbnail"
-       >
 
 </template>
 
@@ -81,7 +87,7 @@ export default {
     methods: {
         loadEntry() {
             const entry = this.getEntryById( this.id )
-            if( !entry ) this.$router.push({ name: 'no-entry' })
+            if( !entry ) return this.$router.push({ name: 'no-entry' })
 
             this.entry = entry
         }
@@ -91,6 +97,13 @@ export default {
         // console.log(this.$route.params.id)
         this.loadEntry()
     },
+
+    watch: {
+        id() {
+            this.loadEntry()
+        },
+    }
+
 }
 
 
