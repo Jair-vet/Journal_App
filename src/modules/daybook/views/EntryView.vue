@@ -1,4 +1,3 @@
-import { defineAsyncComponent } from 'vue';
 <template>
   <div class="entry-title d-flex justify-content-between p-2">
     <div>

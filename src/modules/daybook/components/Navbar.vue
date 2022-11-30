@@ -3,7 +3,7 @@
         <a class="navbar-brand text-white">
             <img src="@/assets/logo.png" 
                  alt="Vue Logo"
-                 height="24"
+                 height="25"
                  class="d-inline-block align-text-top mx-3">
 
                  Daybook
