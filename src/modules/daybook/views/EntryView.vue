@@ -105,9 +105,13 @@ export default {
 
         },
         async saveEntry() {
-            console.log('Guardando Entrada');
+            
+            if( this.entry.id ){
+                // Actualizar
+                await this.updateEntry( this.entry )
+            }
             // Mando llamar la Accion
-            this.updateEntry( this.entry )
+
         },
     },
 
