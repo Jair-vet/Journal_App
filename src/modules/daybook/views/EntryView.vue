@@ -11,12 +11,18 @@
                 </div>
             
                 <div class="botones">
-                    <button class="btn btn-danger mx-2 mb-2">
+                    <button 
+                        v-if="entry.id"
+                        class="btn btn-danger mx-2 mb-2"
+                        @click="onDeleteEntry"
+                    >
                         Borrar
                         <i class="fa fa-trash-alt"></i>
                     </button>
             
-                    <button class="btn btn-primary mx-2  mb-2">
+                    <button 
+                        class="btn btn-primary mx-2  mb-2"
+                    >
                         Foto
                         <i class="fa fa-upload"></i>
                     </button>
@@ -89,7 +95,7 @@ export default {
     },
     
     methods: {
-        ...mapActions('journal', ['updateEntry', 'createEntry']),
+        ...mapActions('journal', ['updateEntry', 'createEntry', 'deleteEntry']),
 
         loadEntry() {
             let entry;
@@ -115,13 +121,19 @@ export default {
             } else{
                 // Crear una nueva entrada
                 const id = await this.createEntry( this.entry )
-
+                
                 // redirecTo => entry, param: id
-                return this.$router.push({ name: 'entry', params: { id } })
-
+                this.$router.push({ name: 'entry', params: { id } })
+                
             }
-
+            
         },
+        
+        async onDeleteEntry() {
+
+            await this.deleteEntry( this.entry.id )
+            this.$router.push({ name: 'no-entry' })
+        }
     },
 
     created() {

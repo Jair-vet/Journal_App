@@ -4,13 +4,13 @@
     @click="$router.push({ name: 'entry', params: { id: entry.id } })"
   >
     <!-- Titulo -->
-    <div class="entry-title d-flex">
+    <div class="entry-title">
         <span class="text-info fs-5 fw-bold"> {{ entryDay }} </span>
         <span class="mx-1 fs-5"> {{ entryMoth }} </span>
         <span class="mx-2 fw-light"> {{ entryYear }} </span>
     </div>
 
-    <div class="entry-description">
+    <div class="entry-description ">
         {{ shortText }}
     </div>
 
@@ -60,6 +60,13 @@ export default {
 
 
 <style lang="scss" scoped>
+.entry-title {
+  display: flex;
+}
+.entry-description {
+  display: flex;
+  font-size: 12px;
+}
 .entry-container{
     transition: 0.2s all ease-in;
 
@@ -68,10 +75,14 @@ export default {
         color: #000;
         transition: 0.2s all ease-in;
     }
-    .entry-description {
-        font-size: 12px;
-    }
 }
 
+
+@media (max-width: 600px) {  
+  .entry-title, .entry-description  {
+    justify-content: center;
+  }
+
+}
 
 </style>

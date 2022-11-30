@@ -1,14 +1,16 @@
  
 // exports const myAction = async ({ commit }) => {
 
-import journalApi from "@/api/journalApi"
-
-   
 // }
-
+import journalApi from "@/api/journalApi"
+   
+// ! CARGAR
 export const loadEntries = async ({ commit }) => {
   
     const { data } = await journalApi.get('/entries.json')
+
+    
+
     const entries = []
     for( let id of Object.keys( data ) ){
         entries.push({
@@ -20,6 +22,7 @@ export const loadEntries = async ({ commit }) => {
     commit('setEntries', entries)
 }
 
+//  ! UPDATE
 export const updateEntry = async ({ commit }, entry) => {
     
     // Extraer unicamente lo ue necesitamos
@@ -36,6 +39,7 @@ export const updateEntry = async ({ commit }, entry) => {
 
 }
 
+// ! CREATE
 export const createEntry = async ({ commit }, entry) => {
   
     // Extraer los datos que necesitamos
@@ -51,6 +55,15 @@ export const createEntry = async ({ commit }, entry) => {
     commit('addEntry', dataToSave)
 
     return data.name
+}
+
+// ! DELETE
+export const deleteEntry = async ({ commit }, id) => {
+    await journalApi.delete( `/entries/${ id }.json`)
+   
+     // Commmit de una mutacion
+     commit('deleteEntry', id)
+     return id
 }
 
 
