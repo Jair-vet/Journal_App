@@ -4,7 +4,7 @@
   />
 
   <div v-if="isLoading"
-    class="row justify-content-center">
+    class="isLoading">
     <div class="container-all ">
       Espere Por Favor
       <h3 class="mt-2">
@@ -55,18 +55,24 @@ body {
   color: #fff;
 }
 
+.isLoading{
+  display: flex;
+  justify-content: center;
+}
 .container-all{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-top: 25rem;
 }
+
 
 @media (max-width: 600px) {  
   .navbar {
     position: fixed;
     width: 100%;
-  }
-  .container-all {
-    flex-direction: column;
   }
   .container-all div {
     width: 100%;
