@@ -2,25 +2,27 @@
     <template v-if="entry">
 
         <div v-if="entry" class="entry-title d-flex justify-content-between p-2">
-          
-          <div>
-              <span class="text-info fs-3 fw-bold">{{ dayMonthYear.day }}</span>
-              <span class="mx-1 fs-3">{{ dayMonthYear.month }}</span>
-              <span class="mx-2 fs-3 fw-light">{{ entryYear }}</span>
-          </div>
-      
-          <div>
-              <button class="btn btn-danger mx-2">
-                  Borrar
-                  <i class="fa fa-trash-alt"></i>
-              </button>
-      
-              <button class="btn btn-primary">
-                  Foto
-                  <i class="fa fa-upload"></i>
-              </button>
-          </div>
-      
+
+            <div class="container">
+                <div>
+                    <span class="text-info fs-3 fw-bold">{{ dayMonthYear.day }}</span>
+                    <span class="mx-1 fs-3">{{ dayMonthYear.month }}</span>
+                    <span class="mx-2 fs-3 fw-light">{{ entryYear }}</span>
+                </div>
+            
+                <div class="botones">
+                    <button class="btn btn-danger mx-2 mb-2">
+                        Borrar
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+            
+                    <button class="btn btn-primary mx-2  mb-2">
+                        Foto
+                        <i class="fa fa-upload"></i>
+                    </button>
+                </div>
+            </div>
+    
         </div>
       
         <hr>
@@ -39,6 +41,7 @@
     </template>
 
   <Fab 
+    class="guardar-icon"
     icon="fa-save"
     @on:click="saveEntry"
   />
@@ -111,7 +114,7 @@ export default {
                 await this.updateEntry( this.entry )
             } else{
                 // Crear una nueva entrada
-                
+
             }
 
         },
@@ -154,6 +157,41 @@ img {
     bottom: 130px;
     right: 20px;
     box-shadow: 0px 10px 15px rgb($color: #000000, $alpha: 0.3);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.botones {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 600px) {  
+    .container {
+        text-align: center;
+        flex-direction: column;
+    }
+    .botones{
+        flex-direction: column;
+    }
+
+    img {
+        width: 150px;
+        bottom: 45px;
+        right: 15px;
+    }
+    .guardar-icon{
+        bottom: 3px;
+        right: 1%;
+    }
+
+    textarea {
+        height: 300px;
+        margin-bottom: 150px;
+    }
 }
 
 </style>

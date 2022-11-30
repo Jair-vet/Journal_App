@@ -1,9 +1,11 @@
 <template>
-  <Navbar />
+  <Navbar 
+    class="navbar"
+  />
 
   <div v-if="isLoading"
     class="row justify-content-center">
-    <div class="col-3 alert-info text-center mt-5">
+    <div class="container-all ">
       Espere Por Favor
       <h3 class="mt-2">
         <i class="fa fa-spin fa-sync"></i>
@@ -12,7 +14,7 @@
   </div>
 
   <div v-else
-    class="d-flex">
+    class="container-all d-flex">
     <div class="col-3">
       <EntryList />
     </div>
@@ -47,10 +49,28 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" >
 body {
   background-color: rgba(8, 137, 160, 0.914);
   color: #fff;
+}
+
+.container-all{
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 600px) {  
+  .navbar {
+    position: fixed;
+    width: 100%;
+  }
+  .container-all {
+    flex-direction: column;
+  }
+  .container-all div {
+    width: 100%;
+  }
 }
 </style>
 

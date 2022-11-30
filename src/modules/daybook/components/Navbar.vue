@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar bg-primary">
+    <nav class="navbar bg-primary notprocessed">
         <a class="navbar-brand text-white">
             <img src="@/assets/logo.png" 
                  alt="Vue Logo"

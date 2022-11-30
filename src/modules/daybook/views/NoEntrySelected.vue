@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-center">
+    <div class="container-noEntry">
         <h1 class="align-self-center">No Hay Nada Seleccionado</h1>
     </div>
 
@@ -28,5 +28,12 @@ export default {
 <style lang="scss" scoped>
 div {
     height: 100%;
+}
+
+.container-noEntry{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 </style>

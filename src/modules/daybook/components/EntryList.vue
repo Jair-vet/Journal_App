@@ -57,6 +57,8 @@ input {
     margin: 20px 0;
 }
 .entry-list-container{
+    display: flex;
+    flex-direction: column;
     border-right: 4px solid #fdfdfdeb;
     height: calc( 100vh - 17px );
     border-radius: 20px;
@@ -65,4 +67,20 @@ input {
     height: calc( 100vh - 110px );
     overflow: scroll;
 }
+
+
+@media (max-width: 600px) {  
+    .entry-list-container{
+       border-right: none;
+       height: calc( 100vh - 390px );
+    }
+    .entry-scrollarea {
+        overflow: scroll;
+    }
+
+    input {
+        margin-top: 70px;
+    }
+}
+
 </style>
