@@ -19,9 +19,7 @@
 </template>
 
 <script>
-// const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-// const days   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado']
-
+const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
 export default {
   props: {
@@ -38,15 +36,13 @@ export default {
     },
 
     entryDay() {
-      const day = new Date(this.entry.date).getDate();
-      return day;
+      const date = new Date( this.entry.date )
+      return date.getDate();
     },
 
     entryMoth() {
-      const moth = new Date(this.entry.date).toLocaleString("default", {
-        month: "long",
-      });
-      return moth;
+      const date = new Date( this.entry.date )
+      return months[ date.getMonth() ];
     },
 
     entryYear() {

@@ -1,9 +1,9 @@
 <template>
   <div class="entry-title d-flex justify-content-between p-2">
     <div>
-        <span class="text-info fs-3 fw-bold">15</span>
-        <span class="mx-1 fs-3">Julio</span>
-        <span class="mx-2 fs-3 fw-light">2022, Jueves</span>
+        <span class="text-info fs-3 fw-bold">{{ dayMonthYear.day }}</span>
+        <span class="mx-1 fs-3">{{ dayMonthYear.month }}</span>
+        <span class="mx-2 fs-3 fw-light">{{ entryYear }}</span>
     </div>
 
     <div>
@@ -22,7 +22,10 @@
 
   <hr>
   <div class="d-flex flex-column px-3 h-75">
-    <textarea placeholder="¿Qué sucedió hoy?"></textarea>   
+    <textarea 
+        v-model="entry.text"
+        placeholder="¿Qué sucedió hoy?"
+    ></textarea>   
   </div>
 
   <Fab 
@@ -38,12 +41,59 @@
 
 <script>
 import {defineAsyncComponent } from 'vue'
+import { mapGetters } from 'vuex';  //propiedades computadas
+
+import getDayMonthYear from '../helpers/getDayMonthYear';
 
 export default {
+    props: {
+        id: {
+            type: String,
+            required: true
+        },
+    },
+
     components: {
         Fab: defineAsyncComponent(() => import('../components/Fab.vue'))
     },
+
+    data() {
+        return {
+            entry: null
+        }
+    },
+
+    computed: {
+        ...mapGetters('journal', ['getEntryById']),
+        dayMonthYear(){
+            const { day, month, yearDay } = getDayMonthYear( this.entry.date )
+            return { day, month, yearDay }
+        },
+        entryYear() {
+        const year = new Date(this.entry.date).toLocaleString("default", {
+            year: "numeric",
+            weekday: "long",
+        });
+        return year;
+        },
+    },
+    
+    methods: {
+        loadEntry() {
+            const entry = this.getEntryById( this.id )
+            if( !entry ) this.$router.push({ name: 'no-entry' })
+
+            this.entry = entry
+        }
+    },
+
+    created() {
+        // console.log(this.$route.params.id)
+        this.loadEntry()
+    },
 }
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -54,7 +104,6 @@ textarea {
     height: 90%;
     font-size: 20px;
     margin-top: 10px;
-    text-align: center;
     box-shadow: 0px 5px 5px rgb($color: #000000, $alpha: 0.2);
 
     &:focus {
