@@ -61,11 +61,8 @@ body {
 }
 .container-all{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
   justify-content: center;
-  align-content: center;
-  margin-top: 25rem;
 }
 
 
@@ -73,6 +70,9 @@ body {
   .navbar {
     position: fixed;
     width: 100%;
+  }
+  .container-all {
+    flex-direction: column;
   }
   .container-all div {
     width: 100%;

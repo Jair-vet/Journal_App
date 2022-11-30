@@ -26,14 +26,17 @@ export default {
 
 
 <style lang="scss" scoped>
-div {
-    height: 100%;
+.container-noEntry {
+  display: flex;
+  justify-content: center;
+  margin-top: 20rem;
 }
 
-.container-noEntry{
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
+@media (max-width: 600px) {
+  .container-noEntry {
+    margin-top: 1rem;
+  }
 }
+
+
 </style>
