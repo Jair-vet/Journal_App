@@ -40,6 +40,7 @@
 
   <Fab 
     icon="fa-save"
+    @on:click="saveEntry"
   />
 
 
@@ -47,7 +48,7 @@
 
 <script>
 import {defineAsyncComponent } from 'vue'
-import { mapGetters } from 'vuex';  //propiedades computadas
+import { mapGetters, mapActions } from 'vuex';  //propiedades computadas
 
 import getDayMonthYear from '../helpers/getDayMonthYear';
 
@@ -85,12 +86,19 @@ export default {
     },
     
     methods: {
+        ...mapActions('journal', ['updateEntry']),
+
         loadEntry() {
             const entry = this.getEntryById( this.id )
             if( !entry ) return this.$router.push({ name: 'no-entry' })
 
             this.entry = entry
-        }
+        },
+        async saveEntry() {
+            console.log('Guardando Entrada');
+            // Mando llamar la Accion
+            this.updateEntry( this.entry )
+        },
     },
 
     created() {

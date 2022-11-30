@@ -3,7 +3,7 @@
 
 import journalApi from "@/api/journalApi"
 
-  
+   
 // }
 
 export const loadEntries = async ({ commit }) => {
@@ -20,8 +20,20 @@ export const loadEntries = async ({ commit }) => {
     commit('setEntries', entries)
 }
 
-export const updateEntry = async (/*{ commit }*/) => {
-  
+export const updateEntry = async ({ commit }, entry) => {
+    
+    // Extraer unicamente lo ue necesitamos
+    const { date, picture, text } = entry
+    const dataToSave = { date, picture, text }
+
+    // Mando llamar la peticion
+    const resp = await journalApi.put( `/entries/${ entry.id }.json`, dataToSave )
+    console.log(resp);
+
+    // Commmit de una mutacion
+    commit('updateEntry', { ...entry })
+
+
 }
 
 export const createEntry = async (/*{ commit }*/) => {
