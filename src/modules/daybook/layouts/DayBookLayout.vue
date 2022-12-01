@@ -1,7 +1,20 @@
 <template>
-  <Navbar />
+  <Navbar 
+    class="navbar"
+  />
 
-  <div class="d-flex">
+  <div v-if="isLoading"
+    class="isLoading">
+    <div class="container-all ">
+      Espere Por Favor
+      <h3 class="mt-2">
+        <i class="fa fa-spin fa-sync"></i>
+      </h3>
+    </div>
+  </div>
+
+  <div v-else
+    class="container-all d-flex">
     <div class="col-3">
       <EntryList />
     </div>
@@ -14,7 +27,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   components: {
@@ -23,7 +36,11 @@ export default {
   },
 
   methods: {
-    ...mapActions('journal', ['loadEntries'])
+    ...mapActions('journal', ['loadEntries']),
+  },
+
+  computed: {
+    ...mapState('journal', ['isLoading'])
   },
 
   created() {
@@ -32,10 +49,34 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" >
 body {
   background-color: rgba(8, 137, 160, 0.914);
   color: #fff;
+}
+
+.isLoading{
+  display: flex;
+  justify-content: center;
+}
+.container-all{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+
+@media (max-width: 780px) {  
+  .navbar {
+    position: fixed;
+    width: 100%;
+  }
+  .container-all {
+    flex-direction: column;
+  }
+  .container-all div {
+    width: 100%;
+  }
 }
 </style>
 

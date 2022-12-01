@@ -9,6 +9,14 @@
             />
         </div>
 
+        <div class="mb-2 d-flex flex-column">
+            <button class="btn btn-primary mx-3"
+                @click="$router.push({ name: 'entry', params: { id: 'new' } })">
+                <i class="fa fa-plus-circle"></i>
+                Nueva Entrada
+            </button>
+        </div>
+
         <div class="entry-scrollarea">
             <Entry 
                 v-for="entry in entriesByTerm"
@@ -49,6 +57,8 @@ input {
     margin: 20px 0;
 }
 .entry-list-container{
+    display: flex;
+    flex-direction: column;
     border-right: 4px solid #fdfdfdeb;
     height: calc( 100vh - 17px );
     border-radius: 20px;
@@ -57,4 +67,20 @@ input {
     height: calc( 100vh - 110px );
     overflow: scroll;
 }
+
+
+@media (max-width: 780px) {  
+    .entry-list-container{
+       border-right: none;
+       height: calc( 100vh - 390px );
+    }
+    .entry-scrollarea {
+        overflow: scroll;
+    }
+
+    input {
+        margin-top: 70px;
+    }
+}
+
 </style>
