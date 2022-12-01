@@ -11,6 +11,11 @@
                 </div>
             
                 <div class="botones">
+
+                    <input type="file"
+                            @change="onSelectImage"
+                    >
+
                     <button 
                         v-if="entry.id"
                         class="btn btn-danger mx-2 mb-2"
@@ -40,9 +45,16 @@
         </div>
 
 
-        <img  src="https://estaticos-cdn.sport.es/clip/cc1f1efe-5198-459e-8e27-9d07d852a94b_alta-libre-aspect-ratio_default_0.jpg"
+        <!-- <img  src="https://estaticos-cdn.sport.es/clip/cc1f1efe-5198-459e-8e27-9d07d852a94b_alta-libre-aspect-ratio_default_0.jpg"
               alt="entry-picture"
               class="img-thumbnail"
+        > -->
+
+        <img  
+            v-if="localImage"
+            :src="localImage"
+            alt="entry-picture"
+            class="img-thumbnail"
         >
     </template>
 
@@ -76,7 +88,9 @@ export default {
 
     data() {
         return {
-            entry: null
+            entry: null,
+            localImage: null,
+            file: null,
         }
     },
 
@@ -115,7 +129,7 @@ export default {
 
         },
         async saveEntry() {
-
+            // Alerta
             new Swal({
                 title: 'Espere por Favor',
                 allowOutsideClick: false,
@@ -157,8 +171,28 @@ export default {
 
                 Swal.fire('Eliminado', '', 'success')
             }
+        },
 
-        }
+        onSelectImage( event ) {
+            const file = event.target.files[0]
+            if( !file ){
+                // Si se cancela la imagen
+                this.localImage = null
+                this.file = null
+                return
+            }
+
+            this.file = file
+
+            const fr = new FileReader()
+            fr.onload = () => this.localImage = fr.result
+            fr.readAsDataURL( file )
+
+        },
+
+        onSelectedImage() {
+            
+        },
     },
 
     created() {
