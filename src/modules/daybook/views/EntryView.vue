@@ -49,10 +49,12 @@
         </div>
 
 
-        <!-- <img  src="https://estaticos-cdn.sport.es/clip/cc1f1efe-5198-459e-8e27-9d07d852a94b_alta-libre-aspect-ratio_default_0.jpg"
-              alt="entry-picture"
-              class="img-thumbnail"
-        > -->
+        <img  
+            v-if="entry.picture && !localImage"
+            :src="entry.picture"
+            alt="entry-picture"
+            class="img-thumbnail"
+        >
 
         <img  
             v-if="localImage"
@@ -77,6 +79,8 @@ import { mapGetters, mapActions } from 'vuex';  //propiedades computadas
 import Swal from 'sweetalert2'
 
 import getDayMonthYear from '../helpers/getDayMonthYear';
+import uploadImage from '../helpers/uploadImage';
+
 
 export default {
     props: {
@@ -139,6 +143,11 @@ export default {
                 allowOutsideClick: false,
             })
             Swal.showLoading()
+
+            // Subir la Imagen a cloudinary
+            const picture = await uploadImage( this.file )
+            // Asiganarla a Firebase
+            this.entry.picture = picture
             
             if( this.entry.id ){
                 // Actualizar
@@ -151,8 +160,8 @@ export default {
                 this.$router.push({ name: 'entry', params: { id } })
             }
 
-            Swal.fire('Guardado', 'Entrada registrada con éxito', 'success')
-            
+            this.file = null
+            Swal.fire('Guardado', 'Entrada registrada con éxito', 'success')            
         },
         
         async onDeleteEntry() {
