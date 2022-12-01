@@ -69,7 +69,7 @@ input {
 }
 
 
-@media (max-width: 600px) {  
+@media (max-width: 780px) {  
     .entry-list-container{
        border-right: none;
        height: calc( 100vh - 390px );

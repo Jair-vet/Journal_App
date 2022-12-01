@@ -78,7 +78,7 @@ export default {
 }
 
 
-@media (max-width: 600px) {  
+@media (max-width: 780px) {  
   .entry-title, .entry-description  {
     justify-content: center;
   }

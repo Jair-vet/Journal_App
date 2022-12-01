@@ -14,11 +14,14 @@
 
                     <input type="file"
                             @change="onSelectImage"
+                            ref="imageSelector"
+                            v-show="false"
+                            accept="image/png, image/jpeg"
                     >
 
                     <button 
                         v-if="entry.id"
-                        class="btn btn-danger mx-2 mb-2"
+                        class="btn btn-danger mx-2 mb-3"
                         @click="onDeleteEntry"
                     >
                         Borrar
@@ -26,7 +29,8 @@
                     </button>
             
                     <button 
-                        class="btn btn-primary mx-2  mb-2"
+                        class="btn btn-primary mx-2 mb-2"
+                        @click="onSelectedImage"
                     >
                         Foto
                         <i class="fa fa-upload"></i>
@@ -191,7 +195,7 @@ export default {
         },
 
         onSelectedImage() {
-            
+            this.$refs.imageSelector.click()
         },
     },
 
@@ -244,7 +248,7 @@ img {
     flex-direction: row;
 }
 
-@media (max-width: 600px) {  
+@media (max-width: 780px) {  
     .container {
         text-align: center;
         flex-direction: column;
@@ -266,6 +270,7 @@ img {
     textarea {
         height: 300px;
         margin-bottom: 150px;
+        text-align: center;
     }
 }
 

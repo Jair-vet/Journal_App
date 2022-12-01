@@ -32,7 +32,7 @@ export default {
   margin-top: 20rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 780px) {
   .container-noEntry {
     margin-top: 1rem;
   }

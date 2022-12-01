@@ -66,7 +66,7 @@ body {
 }
 
 
-@media (max-width: 600px) {  
+@media (max-width: 780px) {  
   .navbar {
     position: fixed;
     width: 100%;
