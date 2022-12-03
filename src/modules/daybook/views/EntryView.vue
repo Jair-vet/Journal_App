@@ -29,7 +29,7 @@
                     </button>
             
                     <button 
-                        class="btn btn-primary mx-2 mb-2"
+                        class="btn btn-primary mx-2 mb-3"
                         @click="onSelectedImage"
                     >
                         Foto
